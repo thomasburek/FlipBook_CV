@@ -1,0 +1,173 @@
+<!--
+Credits:
+Utilisation du code BookBlock de codrops https://github.com/codrops/BookBlock !-->
+
+
+
+
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8" />
+		<title>CV</title>
+		<link rel="stylesheet" type="text/css" href="css/default.css" />
+		<link rel="stylesheet" type="text/css" href="css/bookblock.css" />
+		<script src="js/modernizr.custom.js"></script>
+	</head>
+
+	<body>
+		<div class="container">
+			<div class="bb-custom-wrapper">
+				
+				<div id="bb-bookblock" class="bb-bookblock">
+					<div class="bb-item">
+						<div class="bb-custom-firstpage">
+							<h1>Curriculum Vitae</h1>
+							<h2>&lt; THOMAS &gt;</br>&lt; BUREK &gt;</h2>	
+							
+							
+						</div>
+						<div class="bb-custom-side">
+							<p>27 rue de l'église</br>
+			77440 LE PLESSIS PLACY</br>
+			06 07 18 73 47</br>
+			thomasburek82@gmail.com</p>
+						</div>
+					</div>
+					<div class="bb-item">
+						<div class="bb-custom-side">
+							<p><span>Chapitre I</span></br>  Formation</p>
+						</div>
+						<div class="bb-custom-side">
+							<p>- 2003 -</br>Reçu au concours ESC Amiens</p></br>
+							<p>- 2000-2002 -</br>Classe Préparatoire aux Ecoles Supérieures de Commerce</br>Lycée Henri Moissan, Meaux</p>
+							<p>- 2000 -</br>Baccalauréat Série ES</br>Lycée Ste Marie, Meaux</p>
+						</div>
+					</div>
+					<div class="bb-item">
+						<div class="bb-custom-side">
+							<p><span>Chapitre II</span></br>  Expérience</p>
+						</div>
+						<div class="bb-custom-side">
+							<p>- 2005-2016 -</br>Employé de La Poste</p>
+							<p>- 2003-2005 -</br>Missions d'Intérim</p>
+						</div>
+					</div>
+					<div class="bb-item">
+						<div class="bb-custom-side">
+							<p><span>Chapitre III</span></br>  Compétences</p>
+						</div>
+						<div class="bb-custom-side">
+							<p>- ANGLAIS -</br></br>Score TOEIC 855 Points</p>
+							<p>- INFORMATIQUE -</br></br>Bonne connaissance du matériel informatique</br>
+				Connaissance langages HTML/CSS</br> PCIE Start</p>
+						</div>
+					</div>
+					<div class="bb-item">
+						<div class="bb-custom-side">
+							<p><span>Chapitre IV</span></br>  Loisirs</p>
+						</div>
+						<div class="bb-custom-side">
+							<p>Passionné de musique, guitariste</br>Astronomie</p></br>
+							<div class="fin">Fin.</div>
+						</div>
+					</div>
+				</div>
+
+				<nav>
+					<a id="bb-nav-first" href="#" class="bb-custom-icon bb-custom-icon-first">First page</a>
+					<a id="bb-nav-prev" href="#" class="bb-custom-icon bb-custom-icon-arrow-left">Previous</a>
+					<a id="bb-nav-next" href="#" class="bb-custom-icon bb-custom-icon-arrow-right">Next</a>
+				</nav>
+
+			</div>
+
+		</div><!-- /container -->
+		<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
+		<script src="js/jquerypp.custom.js"></script>
+		<script src="js/jquery.bookblock.js"></script>
+		<script>
+			var Page = (function() {
+				
+				var config = {
+						$bookBlock : $( '#bb-bookblock' ),
+						$navNext : $( '#bb-nav-next' ),
+						$navPrev : $( '#bb-nav-prev' ),
+						$navFirst : $( '#bb-nav-first' ),
+						$navLast : $( '#bb-nav-last' )
+					},
+					init = function() {
+						config.$bookBlock.bookblock( {
+							speed : 1000,
+							shadowSides : 0.8,
+							shadowFlip : 0.4
+						} );
+						initEvents();
+					},
+					initEvents = function() {
+						
+						var $slides = config.$bookBlock.children();
+
+						// add navigation events
+						config.$navNext.on( 'click touchstart', function() {
+							config.$bookBlock.bookblock( 'next' );
+							return false;
+						} );
+
+						config.$navPrev.on( 'click touchstart', function() {
+							config.$bookBlock.bookblock( 'prev' );
+							return false;
+						} );
+
+						config.$navFirst.on( 'click touchstart', function() {
+							config.$bookBlock.bookblock( 'first' );
+							return false;
+						} );
+
+						config.$navLast.on( 'click touchstart', function() {
+							config.$bookBlock.bookblock( 'last' );
+							return false;
+						} );
+						
+						// add swipe events
+						$slides.on( {
+							'swipeleft' : function( event ) {
+								config.$bookBlock.bookblock( 'next' );
+								return false;
+							},
+							'swiperight' : function( event ) {
+								config.$bookBlock.bookblock( 'prev' );
+								return false;
+							}
+						} );
+
+						// add keyboard events
+						$( document ).keydown( function(e) {
+							var keyCode = e.keyCode || e.which,
+								arrow = {
+									left : 37,
+									up : 38,
+									right : 39,
+									down : 40
+								};
+
+							switch (keyCode) {
+								case arrow.left:
+									config.$bookBlock.bookblock( 'prev' );
+									break;
+								case arrow.right:
+									config.$bookBlock.bookblock( 'next' );
+									break;
+							}
+						} );
+					};
+
+					return { init : init };
+
+			})();
+		</script>
+		<script>
+				Page.init();
+		</script>
+	</body>
+</html>
